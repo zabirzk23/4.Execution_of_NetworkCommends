@@ -37,54 +37,13 @@ This includes all commands related to **network configuration**, such as:
 
 ---
 
-## Program
-
-### `client.py`
-
-```python
-import socket
-
-s = socket.socket()
-s.connect(('localhost', 8000))
-
-while True:
-    ip = input("Enter the website you want to ping (or type 'exit' to quit): ")
-    s.send(ip.encode('utf-8'))
-    if ip.lower() == 'exit':
-        break
-    print(s.recv(4096).decode('utf-8'))
-
-s.close()
-```
-### `server.py`
-``` python
-import socket
-from pythonping import ping
-
-s = socket.socket()
-s.bind(('localhost', 8000))
-s.listen(5)
-print("Server listening on port 8000...")
-c, addr = s.accept()
-print(f"Connection from {addr}")
-
-while True:
-    try:
-        hostname = c.recv(1024).decode('utf-8')
-        if not hostname or hostname.lower() == 'exit':
-            print("Client disconnected.")
-            break
-        response = ping(hostname, verbose=False, count=4)
-        c.send(str(response).encode('utf-8'))
-    except Exception as e:
-        c.send(f"Ping failed: {e}".encode('utf-8'))
-
-c.close()
-```
 
 ## Output
 
-<img width="1250" height="333" alt="image" src="https://github.com/user-attachments/assets/fc37821e-7a9c-4eca-a0be-9f8295623d55" />
+<img width="1910" height="626" alt="image" src="https://github.com/user-attachments/assets/21168296-ecb4-4cd5-9efc-2d170d093e1f" />
+<img width="1600" height="1055" alt="image" src="https://github.com/user-attachments/assets/8f067fee-cf01-4ffb-8903-6a3aac218f35" />
+<img width="1046" height="934" alt="image" src="https://github.com/user-attachments/assets/f0064e32-997a-4f9e-898e-e9365376d679" />
+<img width="1047" height="959" alt="image" src="https://github.com/user-attachments/assets/6599ceb7-bdbd-4059-9ee7-eeef3eb504b7" />
 
 ## Result
 
